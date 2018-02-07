@@ -10,9 +10,9 @@ import javax.security.auth.login.LoginException;
 import java.util.Scanner;
 
 /**
- * Main Class. Leuceusseu is a Discord bot. Its basic task is notifying future LCS matches.
- * Other functionality may or may not be added.
- * TODO : comment
+ * Main Class. Leuceusseu is a Discord bot. Its basic task is notifying future LCS matches.<br/>
+ * Other functionality may or may not be added.<br/>
+ * The main class is the runnable starting the bot. Type 'stop' in console to shut down.
  */
 public class Main implements Runnable {
 
@@ -20,11 +20,14 @@ public class Main implements Runnable {
 	private final CommandMap commandMap = new CommandMap(this);
 	private final Scanner scanner = new Scanner(System.in);
 
+	//Discord bot token. If you read this from GitHub, the token is either outdated or linked to a useless bot.
+	private static final String BOT_TOKEN = "NDEwNjM1MDA0NDQwMzQ2NjI2.DVwCeg.cZw146-plaCkNTybp9k0tDiH0pw";
+
 	private boolean running;
 
 	public Main() throws LoginException {
 		//Bot builder. Bot token is set here
-		jda = new JDABuilder(AccountType.BOT).setToken("NDEwNjM1MDA0NDQwMzQ2NjI2.DVwCeg.cZw146-plaCkNTybp9k0tDiH0pw").buildAsync();
+		jda = new JDABuilder(AccountType.BOT).setToken(BOT_TOKEN).buildAsync();
 		jda.addEventListener(new BotListener(commandMap));
 		System.out.println("Bot Leuceusseu connecté au serveur.");
 	}

@@ -18,6 +18,7 @@ import net.dv8tion.jda.core.entities.User;
 
 /**
  * Map linking text commands to actual command code
+ * The double dependency is not very important, as the core code is not supposed to change.
  * @author NeutronStars
  * TODO : Comment more
  */
@@ -53,7 +54,7 @@ public final class CommandMap {
 	 * Register commands from a class
 	 * @param object class containing the methods
 	 */
-	public void registerCommand(Object object){
+	private void registerCommand(Object object){
 		for(Method method : object.getClass().getDeclaredMethods()){
 			if(method.isAnnotationPresent(Command.class)){
 				Command command = method.getAnnotation(Command.class);

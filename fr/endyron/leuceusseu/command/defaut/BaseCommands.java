@@ -5,6 +5,9 @@ import fr.endyron.leuceusseu.command.Command;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.User;
 
+/**
+ * Basic command pack.
+ */
 public class BaseCommands {
 
 	private Main main;
@@ -20,6 +23,6 @@ public class BaseCommands {
 
 	@Command(name="info", type = Command.ExecutorType.USER)
 	private void info(User user, MessageChannel channel){
-		channel.sendMessage(user.getAsMention() + " dans le channel " + channel.getName()).queue(); //Placeholder message
+		channel.sendMessage("Le bot Leuceusseu est un bot open source réalisé par Hector Chomette.").queue(); //Placeholder message
 	}
 }
