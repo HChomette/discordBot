@@ -1,0 +1,61 @@
+package fr.endyron.leuceusseu;
+
+import fr.endyron.leuceusseu.command.CommandMap;
+import fr.endyron.leuceusseu.event.BotListener;
+import net.dv8tion.jda.core.AccountType;
+import net.dv8tion.jda.core.JDA;
+import net.dv8tion.jda.core.JDABuilder;
+
+import javax.security.auth.login.LoginException;
+import java.util.Scanner;
+
+/**
+ * Main Class. Leuceusseu is a Discord bot. Its basic task is notifying future LCS matches.
+ * Other functionality may or may not be added.
+ * TODO : comment
+ */
+public class Main implements Runnable {
+
+	private final JDA jda;
+	private final CommandMap commandMap = new CommandMap(this);
+	private final Scanner scanner = new Scanner(System.in);
+
+	private boolean running;
+
+	public Main() throws LoginException {
+		//Bot builder. Bot token is set here
+		jda = new JDABuilder(AccountType.BOT).setToken("NDEwNjM1MDA0NDQwMzQ2NjI2.DVwCeg.cZw146-plaCkNTybp9k0tDiH0pw").buildAsync();
+		jda.addEventListener(new BotListener(commandMap));
+		System.out.println("Bot Leuceusseu connecté au serveur.");
+	}
+
+	public void setRunning(boolean running){
+		this.running = running;
+	}
+
+	public JDA getJda(){return jda;}
+
+	@Override
+	public void run() {
+		running = true;
+
+		while(running){
+			if(scanner.hasNextLine()) commandMap.commandConsole(scanner.nextLine());
+		}
+
+		scanner.close();
+		System.out.println("Leuceusseu stopped");
+		jda.shutdown();
+		System.exit(0);
+	}
+
+	public static void main(String[] args) {
+		try {
+			Main main = new Main();
+			new Thread(main, "botDiscord").start();
+		} catch (LoginException e) {
+			e.printStackTrace();
+		}
+	}
+
+}
