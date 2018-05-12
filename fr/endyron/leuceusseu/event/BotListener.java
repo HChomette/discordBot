@@ -23,7 +23,6 @@ public class BotListener implements EventListener{
 	 */
 	@Override
 	public void onEvent(Event event) {
-		System.out.println(event.getClass().getSimpleName());
 		if(event instanceof MessageReceivedEvent) onMessage((MessageReceivedEvent)event);
 	}
 
@@ -36,9 +35,11 @@ public class BotListener implements EventListener{
 
 		String message = event.getMessage().getContentDisplay(); //TODO : verify correct getContent
 		if(message.startsWith(commandMap.getTag())) { //Verify start tag
-			message = message.replaceFirst(commandMap.getTag(), ""); //Erase start tag
+			message = message.replaceFirst(commandMap.getTag(), "").toLowerCase(); //Erase start tag;
 			if(commandMap.commandUser(event.getAuthor(), message, event.getMessage())){
 				//When command found
+			} else {
+				System.out.println("Commande non reconnue");
 			}
 		}
 	}

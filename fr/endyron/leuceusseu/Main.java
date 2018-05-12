@@ -21,7 +21,7 @@ public class Main implements Runnable {
 	private final Scanner scanner = new Scanner(System.in);
 
 	//Discord bot token. If you read this from GitHub, the token is either outdated or linked to a useless bot.
-	private static final String BOT_TOKEN = "NDEwNjM1MDA0NDQwMzQ2NjI2.DVwCeg.cZw146-plaCkNTybp9k0tDiH0pw";
+	private static final String BOT_TOKEN = "FALSETOKEN";
 
 	private boolean running;
 

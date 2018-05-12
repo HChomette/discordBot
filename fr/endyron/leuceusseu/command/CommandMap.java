@@ -27,7 +27,7 @@ public final class CommandMap {
 	private final Main main;
 
 	private final Map<String, SimpleCommand> commands = new HashMap<>();
-	private final String tag = "!l"; //Commands start tag
+	private final String tag = "!x "; //Commands start tag
 
 	public CommandMap(Main main) {
 		this.main = main;
@@ -75,6 +75,7 @@ public final class CommandMap {
 			execute(((SimpleCommand)object[0]), command, (String[])object[1], null);
 		}catch(Exception exception){
 			System.out.println("La methode "+((SimpleCommand)object[0]).getMethod().getName()+" n'est pas correctement initialisé.");
+			exception.printStackTrace();
 		}
 	}
 
@@ -85,6 +86,7 @@ public final class CommandMap {
 			execute(((SimpleCommand)object[0]), command,(String[])object[1], message);
 		}catch(Exception exception){
 			System.out.println("La methode "+((SimpleCommand)object[0]).getMethod().getName()+" n'est pas correctement initialisé.");
+			exception.printStackTrace();
 		}
 		return true;
 	}
@@ -109,7 +111,7 @@ public final class CommandMap {
 			else if(parameters[i].getType() == String.class) objects[i] = command;
 			else if(parameters[i].getType() == Message.class) objects[i] = message;
 			else if(parameters[i].getType() == JDA.class) objects[i] = main.getJda();
-			else if(parameters[i].getType() == MessageChannel.class) objects[i] = message.getChannel();
+			else if(parameters[i].getType() == MessageChannel.class && message != null) objects[i] = message.getChannel();
 		}
 		simpleCommand.getMethod().invoke(simpleCommand.getObject(), objects);
 	}
